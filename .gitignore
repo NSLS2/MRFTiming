@@ -1,0 +1,12 @@
+/.vscode
+/bin
+/configure/CONFIG_SITE.local
+/configure/O.*
+/configure/RELEASE.local
+/db
+/dbd
+/include
+/lib
+/MRFTimingApp/Db/O.*
+/MRFTimingApp/src/O.*
+/iocBoot
