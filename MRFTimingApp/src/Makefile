@@ -17,6 +17,9 @@ DBD += MRFTiming.dbd
 MRFTiming_DBD += base.dbd
 # based on the instruction 'Using the device support'
 MRFTiming_DBD += mrfUdpIp.dbd
+# for supplemental database files
+MRFTiming_DBD += busySupport.dbd
+MRFTiming_DBD += calcSupport.dbd
 # NSLS-II standard moduels
 MRFTiming_DBD += asSupport.dbd
 MRFTiming_DBD += devIocStats.dbd
@@ -36,6 +39,9 @@ MRFTiming_LIBS += mrfCommon
 MRFTiming_LIBS += mrfEpics
 MRFTiming_LIBS += mrfEpicsUdpIp
 MRFTiming_LIBS += mrfUdpIp
+# for supplemental database files
+MRFTiming_LIBS += busy
+MRFTiming_LIBS += calc
 # NSLS-II standard moduels
 MRFTiming_LIBS += autosave
 MRFTiming_LIBS += devIocStats
