@@ -1,4 +1,4 @@
-file "db/misc.db" 
+file "${MRFTiming}/db/misc.db" 
 {
     pattern {N}
     {"0"}
