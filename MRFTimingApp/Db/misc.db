@@ -3,7 +3,6 @@ record(stringin, "$(P)$(R):TimeOfDay") {
   field(SCAN,  "1 second")
   field(DTYP,  "Soft Timestamp")
   field(INP, "@%b %d, %Y  %H:%M:%S")
-  #alias("$(P)-TS{EVR:$(L)}Time-I")
 }
 
 record(stringin, "$(P)$(R):HeartBeat_") {
@@ -20,71 +19,102 @@ record(calc, "$(P)$(R):HeartBeat") {
   field(CALC, "A%2=0?1:0")
 }
 
-record(waveform, "$(P)$(R)PulseGen0:TITLE") {
-  field(DESC, "Pulse gen. 0 Output Desc.")
+
+record(waveform, "$(P)$(R)PulseGen$(N):TITLE") {
+  field(DESC, "Pulse gen. $(N) Output Desc.")
   field(FTVL, "STRING")
   field(NELM, "200")
   field(PINI, "YES")
-  #info(autosaveFields_pass1, "VAL")
+  info(autosaveFields_pass1, "VAL")
 }
 
-record(waveform, "$(P)$(R)PulseGen0:USAGE") {
-  field(DESC, "Pulse gen. 0 Usage")
+record(waveform, "$(P)$(R)PulseGen$(N):USAGE") {
+  field(DESC, "Pulse gen. $(N) Usage")
   field(FTVL, "STRING")
   field(NELM, "200")
   field(PINI, "YES")
-  #info(autosaveFields_pass1, "VAL")
+  info(autosaveFields_pass1, "VAL")
 }
 
-record(longout, "$(P)$(R)PulseGen0:CODE") {
-  field(DESC, "Pulse gen. 0 Event Code")
+record(longout, "$(P)$(R)PulseGen$(N):CODE") {
+  field(DESC, "Pulse gen. $(N) Event Code")
   field(SCAN, "1 second")
   field(PINI, "YES")
-  #info(autosaveFields_pass0, "VAL")
+  info(autosaveFields_pass0, "VAL")
 }
 
-record(waveform, "$(P)$(R)PulseGen0:RATE") {
-  field(DESC, "Pulse gen. 0 Event Rate")
+record(waveform, "$(P)$(R)PulseGen$(N):RATE") {
+  field(DESC, "Pulse gen. $(N) Event Rate")
   field(FTVL, "STRING")
   field(NELM, "200")
   field(PINI, "YES")
-  #info(autosaveFields_pass1, "VAL")
+  info(autosaveFields_pass1, "VAL")
+}
+
+
+# User-facing PV (microseconds)
+record(ao, "$(P)$(R)PG$(N):Delay-us")
+{
+    field(DESC, "PulseGen $(N) delay (µs)")
+    field(EGU,  "us")
+    field(PREC, "3")
+    field(PINI, "YES")
+    info(autosaveFields_pass0, "VAL")
+}
+
+# µs → cycles conversion (user wrote Delay_us)
+record(calcout, "$(P)$(R)PG$(N):Delay-us:CY")
+{
+    field(DESC, "µs → cycles")
+    field(INPA, "$(P)$(R)PG$(N):Delay-us CP")
+    field(CALC, "A*124.9")
+    field(OUT,  "$(P)$(R)PulseGen$(N):Delay PP")
+}
+
+# cycles → µs conversion (user wrote Delay)
+record(calcout, "$(P)$(R)PG$(N):Delay-us:US")
+{
+    field(DESC, "cycles → µs")
+    field(INPA, "$(P)$(R)PulseGen$(N):Delay CP")
+    field(CALC, "A/124.9")
+    field(OUT,  "$(P)$(R)PG$(N):Delay-us PP")
+}
+
+
+# User-facing PV (microseconds)
+record(ao, "$(P)$(R)PG$(N):Width-us")
+{
+    field(DESC, "PulseGen $(N) width (µs)")
+    field(EGU,  "us")
+    field(DRVL, "0")
+    field(DRVH, "1000")
+    field(PREC, "3")
+    field(PINI, "YES")
+    info(autosaveFields_pass0, "VAL")
+}
+
+# µs → cycles conversion
+record(calcout, "$(P)$(R)PG$(N):Width-us:CY")
+{
+    field(DESC, "µs → cycles")
+    field(INPA, "$(P)$(R)PG$(N):Width-us CP")
+    field(CALC, "A*124.9")
+    field(OUT,  "$(P)$(R)PulseGen$(N):Width PP")
+}
+
+# cycles → µs conversion
+record(calcout, "$(P)$(R)PG$(N):Width-us:US")
+{
+    field(DESC, "cycles → µs")
+    field(INPA, "$(P)$(R)PulseGen$(N):Width CP")
+    field(CALC, "A/124.9")
+    field(OUT,  "$(P)$(R)PG$(N):Width-us PP")
 }
 
 
 # Network information
 record(stringin, "$(P)$(R)EVR:MAC-Address") {
   field(DESC, "MAC Address for MRF Device")
-  #field(VAL,  "$(MAC)")
   field(PINI, "YES")
-  #info(autosaveFields_pass0, "VAL")}
-
-record(stringin, "$(P)$(R)EVR:IP-Address") {
-  field(DESC, "IP Address for MRF Device")
-  field(VAL,  "$(IP)")
-  field(PINI, "YES")
-  #info(autosaveFields_pass0, "VAL")}
-
-record(stringin, "$(P)$(R)EVR:Network-Switch") {
-  field(DESC, "Network Switch of MRF Device")
-  #field(VAL,  "$(NET)")
-  field(PINI, "YES")
-  #info(autosaveFields_pass0, "VAL")}
-
-record(stringin, "$(P)$(R)EVR:Network-Port") {
-  field(DESC, "Network Port of MRF Device")
-  #field(VAL,  "$(PORT)")
-  field(PINI, "YES")
-  #info(autosaveFields_pass0, "VAL")}
-
-record(stringin, "$(P)$(R)EVR:Location") {
-  field(DESC, "Location of MRF Device")
-  #field(VAL,  "$(LOC)")
-  field(PINI, "YES")
-  #info(autosaveFields_pass0, "VAL")}
-
-record(stringin, "$(P)$(R)EVR:Rack") {
-  field(DESC, "Rack of MRF Device")
-  #field(VAL,  "$(RACK)")
-  field(PINI, "YES")
-  #info(autosaveFields_pass0, "VAL")}
+  info(autosaveFields_pass0, "VAL")
+}

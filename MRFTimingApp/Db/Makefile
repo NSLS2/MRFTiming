@@ -5,6 +5,7 @@ include $(TOP)/configure/CONFIG
 
 # Install databases, templates & substitutions like this
 DB += misc.db
+DB += misc.substitutions
 #DB += $(MRF)/db/vme-evr-230rf.db
 
 # If <anyname>.db template is not named <anyname>*.template add
