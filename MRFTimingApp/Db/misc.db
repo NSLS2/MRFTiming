@@ -118,3 +118,13 @@ record(stringin, "$(P)$(R)EVR:MAC-Address") {
   field(PINI, "YES")
   info(autosaveFields_pass0, "VAL")
 }
+
+record(bo, "$(P)$(R)Default-Cmd")
+{
+    field(DESC, "Default settings")
+    field(PINI,"YES")
+    field(DTYP, "Launcher")
+    field(ZNAM, "Idle")
+    field(ONAM, "Set")
+    field(OUT,  "@python3 /epics/modules/MRFTiming/python/default.py")
+}
