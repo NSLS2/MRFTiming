@@ -1,4 +1,3 @@
-/.vscode
 /bin
 /configure/CONFIG_SITE.local
 /configure/O.*
@@ -7,6 +6,6 @@
 /dbd
 /include
 /lib
-/MRFTimingApp/Db/O.*
-/MRFTimingApp/src/O.*
-/iocBoot
+/*App/Db/O.*
+/*App/src/O.*
+/.vscode

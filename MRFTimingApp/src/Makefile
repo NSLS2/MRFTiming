@@ -20,6 +20,7 @@ MRFTiming_DBD += mrfUdpIp.dbd
 # for supplemental database files
 MRFTiming_DBD += busySupport.dbd
 MRFTiming_DBD += calcSupport.dbd
+MRFTiming_DBD += elauncherSupport.dbd
 # NSLS-II standard moduels
 MRFTiming_DBD += asSupport.dbd
 MRFTiming_DBD += devIocStats.dbd
@@ -42,6 +43,7 @@ MRFTiming_LIBS += mrfUdpIp
 # for supplemental database files
 MRFTiming_LIBS += busy
 MRFTiming_LIBS += calc
+MRFTiming_LIBS += elauncherSupport
 # NSLS-II standard moduels
 MRFTiming_LIBS += autosave
 MRFTiming_LIBS += devIocStats
