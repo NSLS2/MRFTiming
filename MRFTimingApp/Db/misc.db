@@ -126,5 +126,5 @@ record(bo, "$(P)$(R)Default-Cmd")
     field(DTYP, "Launcher")
     field(ZNAM, "Idle")
     field(ONAM, "Set")
-    field(OUT,  "@python3 /epics/modules/MRFTiming/python/default.py")
+    field(OUT,  "@python3 $(MRFTiming)/python/default.py")
 }
